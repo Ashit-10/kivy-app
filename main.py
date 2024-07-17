@@ -22,7 +22,7 @@ COLORS = ["#3498db", "#1abc9c", "#f39c12", "#e74c3c", "#8e44ad", "#2ecc71"]
 class RoundedButton(Button):
     def __init__(self, **kwargs):
         super(RoundedButton, self).__init__(**kwargs)
-        self.background_normal = ''  # Remove the default background
+        self.background_normal = ''  # Remove the default backgroun
         self.background_color = (0, 0, 1, 0)  # Make the background transparent
         self.canvas.before.clear()
         with self.canvas.before:
