@@ -19,7 +19,9 @@ jobs:
         sudo apt-get install -y python3-pip build-essential git wget unzip
         pip install --upgrade cython
         pip install buildozer
-
+        echo "Adding Buildozer to PATH"
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+        
     - name: Set up Android SDK
       env:
         ANDROID_SDK_ROOT: ${{ github.workspace }}/android-sdk
@@ -31,11 +33,11 @@ jobs:
         yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
         $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --update
         $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-
+        
     - name: Build APK
       env:
         ANDROID_HOME: ${{ github.workspace }}/android-sdk
-        PATH: ${{ github.workspace }}/android-sdk/platform-tools:${{ github.workspace }}/android-sdk/cmdline-tools/latest/bin:$PATH
+        PATH: ${{ github.workspace }}/android-sdk/platform-tools:${{ github.workspace }}/android-sdk/cmdline-tools/latest/bin:$HOME/.local/bin:$PATH
       run: |
         buildozer -v android debug
 
